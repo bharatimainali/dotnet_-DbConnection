@@ -4,21 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace dotnet__DbConnection.DbConnection
 {
     public class OracleConnection : DbConnection
-    { 
+    {
         public OracleConnection(string connectionString) : base(connectionString)
         {
+        }
 
-        }
-        public override void OpenConnection()
+        public override void Open()
         {
-            Console.WriteLine("Opening Oracle connection using connection string: {0}", ConnectionString);
+            Console.WriteLine("Oracle Connection opened");
         }
-        public override void CloseConnection() 
+
+        public override void Close()
         {
-            Console.WriteLine("Closing Oracle connection.");
+            Console.WriteLine("Oracle Connection closed");
         }
     }
 }
