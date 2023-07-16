@@ -1,23 +1,28 @@
-﻿
-using System;
+﻿using System;
+using System.Data.Common;
+using System.Data.SqlClient;
+using dotnet_DatabaseCommand.DatabaseCommand;
 
 namespace dotnet__DbConnection.DbConnection
 {
-   public class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string sqlConnectionString = "Data Source=.;Initial Catalog=YourDatabase;Integrated Security=True";
+            var sqlConnectionString = "your_sql_connection_string_here";
+            var instruction = "SELECT * FROM Customers";
+
             DbConnection sqlConnection = new SqlConnection(sqlConnectionString);
-            sqlConnection.OpenConnection();
-            sqlConnection.CloseConnection();
+            dotnet_DatabaseCommand.DatabaseCommand.DbCommand sqlCommand = new dotnet_DatabaseCommand.DatabaseCommand.DbCommand(sqlConnection, instruction);
 
-            string oracleConnectionString = "Data Source=YourDataSource;User Id=YourUserId;Password=YourPassword;";
+            sqlCommand.Execute();
+
+            // Swap SqlConnection with OracleConnection
+            var oracleConnectionString = "your_oracle_connection_string_here";
             DbConnection oracleConnection = new OracleConnection(oracleConnectionString);
-            oracleConnection.OpenConnection();
-            oracleConnection.CloseConnection();
+            dotnet_DatabaseCommand.DatabaseCommand.DbCommand oracleCommand = new dotnet_DatabaseCommand.DatabaseCommand.DbCommand(oracleConnection, instruction);
 
-            Console.ReadKey();
+            oracleCommand.Execute();
         }
     }
 }

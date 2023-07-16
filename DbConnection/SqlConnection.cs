@@ -8,19 +8,18 @@ namespace dotnet__DbConnection.DbConnection
 {
     public class SqlConnection : DbConnection
     {
-        // Constructor for SqlConnection class that takes a connection string parameter
         public SqlConnection(string connectionString) : base(connectionString)
         {
+        }
 
-        }
-        // Implementation of the abstract method from the base class to open/close the connection
-        public override void OpenConnection()
+        public override void Open()
         {
-            Console.WriteLine("Opening SQL Server connection using connection string: {0}", ConnectionString);
+            Console.WriteLine("SQL Connection opened");
         }
-        public override void CloseConnection() 
+
+        public override void Close()
         {
-            Console.WriteLine("Closing SQL Server connection.");
+            Console.WriteLine("SQL Connection closed");
         }
     }
 }

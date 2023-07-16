@@ -9,32 +9,17 @@ namespace dotnet__DbConnection.DbConnection
 {
     public abstract class DbConnection
     {
-        public string connectionString;
+        public string connectionString { get; private set; }
         public TimeSpan Timeout { get; set; }
 
-        public string ConnectionString
+        public  DbConnection(string connectionString)
         {
-            get
-            {
-                return connectionString;
-            }
-            set
-            {
-                if(string.IsNullOrEmpty(value)) 
-                {
-                    throw new InvalidOperationException("Connection string cannot be null or empty.");
-                }
-                connectionString = value;
-            }
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentNullException(nameof(connectionString),"Connection string cannot be null or empty.");
+
+            this.connectionString = connectionString.Trim();
         }
-        // Constructor for the DbConnection class
-        public DbConnection(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
-        // Declaration of an abstract method named "OpenConnection" (to be implemented by derived classes)
-        public abstract void OpenConnection();
-        // Declaration of an abstract method named "CloseConnection" (to be implemented by derived classes)
-        public abstract void CloseConnection();
+        public abstract void Open();
+        public abstract void Close();
     }
 }
